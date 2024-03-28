@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">　　<!-- ① -->
+<head>
+<meta charset="UTF-8">
+<title>hello55</title>
+</head>
+<body>
+Hello, world! こんにちは <span th:text="${name}"></span> さん!　<!-- ② -->
+</body>
+</html>
+
+<!--
+①
+<htmlxmlns:th="http://www.thymeleaf.org">「このHTMLファイルに"th:～"という属性があれば、それはThymeleafのもの」ということを宣言しています。
+こう宣言するとThymeleafはテンプレートファイルから"th:～"を探し、そこで何らかの処理(主にコンテンツ生成)を行います。②はその典型例です。
+
+②
+<span th:text ="${name}"></span>
+span要素にth:textという属性があります。
+Thymeleafはth:textを見つけると、右辺"${...}"の中に書かれている変数の値を、タグのテキストに変換します。
+この${...}を「変数式」と言います。
+たとえば変数nameに"James"が設定されていれば、Thymeleafが次のようにします。
+
+Hello,world!こんにちは<span>James</span>さん!
+
+"th:～"の処理が終わったら、サーバーはThymeleafが処理したテンプレートファイルを、レスポンスとしてブラウザに返します。
+
+菊田英明.SpringBoot3で始めるWebアプリケーション開発入門(基礎編):プログラミング初心者・Webプログラマになりたい人向け超入門テキスト(P.126).Kindle版.
+-->
