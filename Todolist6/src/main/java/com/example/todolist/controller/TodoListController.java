@@ -82,7 +82,7 @@ public class TodoListController {
 			// todoPage = todoQueryService.query(todoQuery, pageable);
 			// ↓
 			// JPQL による検索
-			//todoList = todoDaoImpl.findByJPQL(todoQuery);
+			// todoList = todoDaoImpl.findByJPQL(todoQuery);
 			todoPage = todoDaoImpl.findByCriteria(todoQuery, pageable);
 			// 入力された検索条件を session に保存
 			session.setAttribute("todoQuery", todoQuery);
@@ -102,7 +102,10 @@ public class TodoListController {
 	}
 
 	@GetMapping("/todo/query")
-	public ModelAndView queryTodo(@PageableDefault(page = 0, size = 5) Pageable pageable, ModelAndView mv) {
+	public ModelAndView queryTodo(
+		@PageableDefault(page = 0, size = 5) Pageable pageable,
+		ModelAndView mv
+	) {
 
 		mv.setViewName("todoList");
 		// session に保存されている条件で検索
@@ -131,7 +134,11 @@ public class TodoListController {
 	// 【処理 2 】 ToDo 入力画面(todoForm.html)で[登録]ボタンがクリックされたとき
 	// ToDo 追加処理(Todolist2 で追加したものを Todolist3 で改善)
 	@PostMapping("/todo/create")
-	public String createTodo(@ModelAttribute @Validated TodoData todoData, BindingResult result, Model model) {
+	public String createTodo(
+		@ModelAttribute @Validated TodoData todoData,
+		BindingResult result,
+		Model model
+	) {
 
 		// エラーチェック
 		boolean isValid = todoService.isValid(todoData, result);

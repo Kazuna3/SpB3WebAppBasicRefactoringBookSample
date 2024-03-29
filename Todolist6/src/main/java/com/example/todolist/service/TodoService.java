@@ -105,7 +105,9 @@ public class TodoService {
 			} catch (DateTimeException e) {
 
 				// parse できない場合
-				FieldError fieldError = new FieldError(result.getObjectName(), "deadlineFrom",
+				FieldError fieldError = new FieldError(
+						result.getObjectName(),
+						"deadlineFrom",
 						"期限：開始を入力するときは yyyy-mm-dd 形式で入力してください");
 				result.addError(fieldError);
 				ans = false;
