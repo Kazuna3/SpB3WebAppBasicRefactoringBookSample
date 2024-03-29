@@ -4,12 +4,9 @@ import java.sql.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import com.example.todolist.entity.Todo;
 
-//TODO @Repository が不要であると警告が出ている。よって、削除しても問題が無ければコメントアウトすること。
-@Repository // ①
 public interface TodoRepository extends JpaRepository<Todo, Integer> { // ②
 
 	List<Todo> findByTitleLike(String title);
