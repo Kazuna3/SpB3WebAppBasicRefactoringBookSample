@@ -52,6 +52,26 @@ public class GameController {
 
 		}
 
+		/*
+		 * ［session.setAttribute("histories", histories);］を実行していないのに、
+		 * ［histories.add(new History(histories.size() + 1, number, "・・・"));］で、
+		 * session の "histories" にデータが追加されているのを、復習時に不思議に思った。
+		 * 要は、［session.setAttribute("histories", histories);］の histories と、
+		 * ［histories.add(new History(histories.size() + 1, number, "・・・"));］の histories の参照先が
+		 * 同一であるため、［session.setAttribute("histories", histories);］を実行しなくても、
+		 * session の "histories" のデータが追加されているのである。
+		 * 書籍［SpringBoot3で始めるWebアプリケーション開発入門(基礎編)］の
+		 * P.172［数当てゲーム 起動時の処理］以降に、説明もある。
+		 */
+		//>>>
+		// 【session の "histories" のデータの確認処理】
+		@SuppressWarnings("unchecked")
+		List<History> checkHistories_1 = (List<History>) session.getAttribute("histories");
+		System.out.println("◇checkHistories_1 => " + checkHistories_1);
+		checkHistories_1.stream().forEach(
+				s -> System.out.println("No." + s.getSeq() + " 回答：" + s.getYourAnswer() + " 結果：" + s.getResult()));
+		//<<<
+
 		// 判定→回答履歴追加
 		if (answer < number) {
 
@@ -67,8 +87,18 @@ public class GameController {
 
 		}
 
+		//>>>
+		// 【session の "histories" のデータの確認処理】
+		@SuppressWarnings("unchecked")
+		List<History> checkHistories_2 = (List<History>) session.getAttribute("histories");
+		System.out.println("◆checkHistories_2 => " + checkHistories_2);
+		checkHistories_2.stream().forEach(
+				s -> System.out.println("No." + s.getSeq() + " 回答：" + s.getYourAnswer() + " 結果：" + s.getResult()));
+		//<<<
+
 		mv.setViewName("game"); // ⑩
 		mv.addObject("histories", histories); // ⑩
+
 		return mv;
 
 	}
