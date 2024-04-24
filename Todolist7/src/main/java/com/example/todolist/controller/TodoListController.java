@@ -46,6 +46,13 @@ public class TodoListController {
 
 	}
 
+	@GetMapping("/")
+	public String defaultHandlerMethod() {
+
+		return "redirect:/todo";
+
+	}
+
 	// ToDo一覧表示
 	@GetMapping("/todo")
 	public ModelAndView showTodoList(

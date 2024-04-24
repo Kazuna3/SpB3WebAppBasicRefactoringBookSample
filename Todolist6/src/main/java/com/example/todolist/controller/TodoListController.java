@@ -46,8 +46,14 @@ public class TodoListController {
 
 	}
 
-	// ToDo 一覧表示(Todolist で追加)
+	@GetMapping("/")
+	public String defaultHandlerMethod() {
 
+		return "redirect:/todo";
+
+	}
+
+	// ToDo 一覧表示(Todolist で追加)
 	@GetMapping("/todo")
 	public ModelAndView showTodoList(
 		ModelAndView mv,
